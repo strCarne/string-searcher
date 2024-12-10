@@ -4,6 +4,9 @@
 #include <QMainWindow>
 #include <QFuture>
 #include <QFutureWatcher>
+#include <vector>
+
+#include "search/search.h"
 
 #define PAGE_SEARCH 0
 #define PAGE_WAIT 1
@@ -24,16 +27,18 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_pushButton_2_clicked();
+    void on_pushButton_choose_clicked();
+
+    void on_pushButton_search_clicked();
+
+    void on_pushButton_go_to_main_clicked();
 
 private:
-    void StartSearch();
-    void PerformSearch();
     void OnSearchFinished();
 
     Ui::MainWindow *ui;
 
-    QFuture<void> computationFuture_;
-    QFutureWatcher<void> computationWatcher_;
+    QFuture<std::vector<search::Result>> computationFuture_;
+    QFutureWatcher<std::vector<search::Result>> computationWatcher_;
 };
 #endif // MAIN_WINDOW_H

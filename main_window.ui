@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>528</width>
-    <height>502</height>
+    <width>682</width>
+    <height>598</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -27,7 +27,7 @@
        </sizepolicy>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="page_search">
        <property name="sizePolicy">
@@ -102,7 +102,7 @@
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout">
           <item>
-           <widget class="QLineEdit" name="lineEdit">
+           <widget class="QLineEdit" name="lineEdit_file_path">
             <property name="font">
              <font>
               <family>JetBrains Mono</family>
@@ -154,7 +154,7 @@ QLineEdit::placeholder {
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton">
+           <widget class="QPushButton" name="pushButton_choose">
             <property name="font">
              <font>
               <family>JetBrains Mono</family>
@@ -199,7 +199,7 @@ QPushButton:disabled {
          </layout>
         </item>
         <item>
-         <widget class="QLineEdit" name="lineEdit_2">
+         <widget class="QLineEdit" name="lineEdit_target">
           <property name="styleSheet">
            <string notr="true">QLineEdit {
     border: 2px solid #3498db;              /* Blue border */
@@ -241,7 +241,7 @@ QLineEdit::placeholder {
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButton_2">
+         <widget class="QPushButton" name="pushButton_search">
           <property name="font">
            <font>
             <family>Jetbrains Mono</family>
@@ -300,58 +300,6 @@ QPushButton:disabled {
           </property>
          </widget>
         </item>
-        <item>
-         <spacer name="verticalSpacer">
-          <property name="orientation">
-           <enum>Qt::Orientation::Vertical</enum>
-          </property>
-          <property name="sizeType">
-           <enum>QSizePolicy::Policy::Fixed</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item>
-         <widget class="QPushButton" name="pushButton_cancel">
-          <property name="styleSheet">
-           <string notr="true">QPushButton {
-    background-color: #4cd63a;              
-    border: 2px solid #238017;             
-    color: white;             
-    border-radius: 12px;                
-    font-size: 26px;                  
-    padding: 10px 20px;                 
-    font-family: 'Jetbrains Mono', 'Arial', sans-serif;   
-    text-align: center;                    
-}
-
-QPushButton:hover {
-    background-color: #238017;             
-    border: 2px solid #4cd63a;            
-}
-
-QPushButton:pressed {
-    background-color: #00ffa2;              /* Greenish background when pressed */
-    border: 2px solid #008253;              /* Greenish border when pressed */
-}
-
-QPushButton:disabled {
-    background-color: #bdc3c7;              /* Gray background when disabled */
-    border: 2px solid #95a5a6;              /* Gray border when disabled */
-    color: #7f8c8d;                         /* Lighter text color when disabled */
-}
-</string>
-          </property>
-          <property name="text">
-           <string>Cancel</string>
-          </property>
-         </widget>
-        </item>
        </layout>
       </widget>
       <widget class="QWidget" name="page_results">
@@ -383,7 +331,7 @@ QPushButton:disabled {
          </widget>
         </item>
         <item>
-         <widget class="QTreeWidget" name="treeWidget">
+         <widget class="QTreeWidget" name="treeWidget_results">
           <property name="styleSheet">
            <string notr="true">QTreeWidget {
     background-color: #f9f9f9;  /* Soft light background */
@@ -478,26 +426,6 @@ QTreeWidget::item:disabled {
             </color>
            </property>
           </column>
-          <item>
-           <property name="text">
-            <string>path_to_file</string>
-           </property>
-           <item>
-            <property name="text">
-             <string>Line number: x</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Line offset: y</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Line: 'line itself'</string>
-            </property>
-           </item>
-          </item>
          </widget>
         </item>
         <item>
@@ -517,7 +445,7 @@ QTreeWidget::item:disabled {
          </spacer>
         </item>
         <item alignment="Qt::AlignmentFlag::AlignHCenter">
-         <widget class="QPushButton" name="pushButton_3">
+         <widget class="QPushButton" name="pushButton_go_to_main">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>

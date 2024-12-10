@@ -23,6 +23,10 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(string-searcher
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
+        thread/pool.h
+        search/search.h
+        search/search.cpp
+        rai/on_destroy.h
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET string-searcher APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
