@@ -6,25 +6,564 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>528</width>
+    <height>502</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
-  <widget class="QWidget" name="centralwidget"/>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>800</width>
-     <height>23</height>
-    </rect>
+  <widget class="QWidget" name="centralwidget">
+   <property name="styleSheet">
+    <string notr="true"/>
    </property>
+   <layout class="QHBoxLayout" name="horizontalLayout_4">
+    <item>
+     <widget class="QStackedWidget" name="stackedWidget">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Ignored">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="page_search">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <item>
+           <widget class="QLabel" name="label">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>100</width>
+              <height>100</height>
+             </size>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="pixmap">
+             <pixmap>logo.png</pixmap>
+            </property>
+            <property name="scaledContents">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item alignment="Qt::AlignmentFlag::AlignHCenter">
+           <widget class="QLabel" name="label_2">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="font">
+             <font>
+              <family>URW Bookman</family>
+              <pointsize>26</pointsize>
+              <italic>false</italic>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>String Searcher</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <item>
+           <widget class="QLineEdit" name="lineEdit">
+            <property name="font">
+             <font>
+              <family>JetBrains Mono</family>
+              <pointsize>-1</pointsize>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QLineEdit {
+    border: 2px solid #3498db;              /* Blue border */
+    border-radius: 12px;                    /* Rounded corners */
+    padding: 8px 12px;                      /* Internal padding */
+    background-color: #f0f3f5;              /* Light gray background */
+    font-size: 14px;                        /* Font size */
+    color: #2c3e50;                         /* Dark text color */
+    font-family: 'JetBrains Mono', 'Arial', sans-serif;        /* Font family */
+}
+
+QLineEdit:focus {
+    border: 2px solid #e74c3c;              /* Red border on focus */
+    background-color: #ffffff;              /* White background when focused */
+    /* box-shadow: 0px 0px 10px rgba(231, 76, 60, 0.4);  -- Removed */
+}
+
+QLineEdit:hover {
+    border: 2px solid #2980b9;              /* Change border to blue on hover */
+    background-color: #ecf0f1;              /* Light background on hover */
+    /* box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2);  -- Removed */
+}
+
+QLineEdit:disabled {
+    border: 2px solid #bdc3c7;              /* Light gray border when disabled */
+    background-color: #e5e5e5;              /* Slightly darker background when disabled */
+    color: #7f8c8d;                         /* Light text color when disabled */
+}
+
+QLineEdit::placeholder {
+    color: #95a5a6;                         /* Lighter placeholder text color */
+    font-style: italic;                     /* Italic placeholder */
+}
+</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="placeholderText">
+             <string>Path to the folder/file</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton">
+            <property name="font">
+             <font>
+              <family>JetBrains Mono</family>
+              <pointsize>-1</pointsize>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
+    background-color: #3498db;              /* Blue background */
+    border: 2px solid #2980b9;              /* Darker blue border */
+    color: white;                           /* White text */
+    border-radius: 12px;                    /* Rounded corners */
+    font-size: 14px;                        /* Font size */
+    padding: 10px 20px;                     /* Padding for button */
+    font-family: 'JetBrains Mono', 'Arial', sans-serif;       /* Font family */
+    text-align: center;                     /* Center the text */
+}
+
+QPushButton:hover {
+    background-color: #2980b9;              /* Darker blue on hover */
+    border: 2px solid #3498db;              /* Light blue border on hover */
+}
+
+QPushButton:pressed {
+    background-color: #1abc9c;              /* Greenish background when pressed */
+    border: 2px solid #16a085;              /* Greenish border when pressed */
+}
+
+QPushButton:disabled {
+    background-color: #bdc3c7;              /* Gray background when disabled */
+    border: 2px solid #95a5a6;              /* Gray border when disabled */
+    color: #7f8c8d;                         /* Lighter text color when disabled */
+}
+</string>
+            </property>
+            <property name="text">
+             <string>Choose</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="lineEdit_2">
+          <property name="styleSheet">
+           <string notr="true">QLineEdit {
+    border: 2px solid #3498db;              /* Blue border */
+    border-radius: 12px;                    /* Rounded corners */
+    padding: 8px 12px;                      /* Internal padding */
+    background-color: #f0f3f5;              /* Light gray background */
+    font-size: 14px;                        /* Font size */
+    color: #2c3e50;                         /* Dark text color */
+    font-family: 'JetBrains Mono', 'Arial', sans-serif;        /* Font family */
+}
+
+QLineEdit:focus {
+    border: 2px solid #e74c3c;              /* Red border on focus */
+    background-color: #ffffff;              /* White background when focused */
+    /* box-shadow: 0px 0px 10px rgba(231, 76, 60, 0.4);  -- Removed */
+}
+
+QLineEdit:hover {
+    border: 2px solid #2980b9;              /* Change border to blue on hover */
+    background-color: #ecf0f1;              /* Light background on hover */
+    /* box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2);  -- Removed */
+}
+
+QLineEdit:disabled {
+    border: 2px solid #bdc3c7;              /* Light gray border when disabled */
+    background-color: #e5e5e5;              /* Slightly darker background when disabled */
+    color: #7f8c8d;                         /* Light text color when disabled */
+}
+
+QLineEdit::placeholder {
+    color: #95a5a6;                         /* Lighter placeholder text color */
+    font-style: italic;                     /* Italic placeholder */
+}
+</string>
+          </property>
+          <property name="placeholderText">
+           <string>Search target string</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButton_2">
+          <property name="font">
+           <font>
+            <family>Jetbrains Mono</family>
+            <pointsize>-1</pointsize>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
+    background-color: #4cd63a;              
+    border: 2px solid #238017;             
+    color: white;             
+    border-radius: 12px;                
+    font-size: 26px;                  
+    padding: 10px 20px;                 
+    font-family: 'Jetbrains Mono', 'Arial', sans-serif;   
+    text-align: center;                    
+}
+
+QPushButton:hover {
+    background-color: #238017;             
+    border: 2px solid #4cd63a;            
+}
+
+QPushButton:pressed {
+    background-color: #00ffa2;              /* Greenish background when pressed */
+    border: 2px solid #008253;              /* Greenish border when pressed */
+}
+
+QPushButton:disabled {
+    background-color: #bdc3c7;              /* Gray background when disabled */
+    border: 2px solid #95a5a6;              /* Gray border when disabled */
+    color: #7f8c8d;                         /* Lighter text color when disabled */
+}
+</string>
+          </property>
+          <property name="text">
+           <string>Search!</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="page_wait">
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item alignment="Qt::AlignmentFlag::AlignHCenter">
+         <widget class="QLabel" name="label_wait">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="verticalSpacer">
+          <property name="orientation">
+           <enum>Qt::Orientation::Vertical</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Policy::Fixed</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButton_cancel">
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
+    background-color: #4cd63a;              
+    border: 2px solid #238017;             
+    color: white;             
+    border-radius: 12px;                
+    font-size: 26px;                  
+    padding: 10px 20px;                 
+    font-family: 'Jetbrains Mono', 'Arial', sans-serif;   
+    text-align: center;                    
+}
+
+QPushButton:hover {
+    background-color: #238017;             
+    border: 2px solid #4cd63a;            
+}
+
+QPushButton:pressed {
+    background-color: #00ffa2;              /* Greenish background when pressed */
+    border: 2px solid #008253;              /* Greenish border when pressed */
+}
+
+QPushButton:disabled {
+    background-color: #bdc3c7;              /* Gray background when disabled */
+    border: 2px solid #95a5a6;              /* Gray border when disabled */
+    color: #7f8c8d;                         /* Lighter text color when disabled */
+}
+</string>
+          </property>
+          <property name="text">
+           <string>Cancel</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="page_results">
+       <layout class="QVBoxLayout" name="verticalLayout_3">
+        <item alignment="Qt::AlignmentFlag::AlignHCenter">
+         <widget class="QLabel" name="label_3">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>60</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>URW Bookman</family>
+            <pointsize>26</pointsize>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>Results</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QTreeWidget" name="treeWidget">
+          <property name="styleSheet">
+           <string notr="true">QTreeWidget {
+    background-color: #f9f9f9;  /* Soft light background */
+    border: 1px solid #ddd;  /* Subtle border for the tree widget */
+    color: #444;  /* Darker text color for better readability */
+    font-size: 14px;  /* Font size for the items */
+    font-family: 'JetBrains Mono', Tahoma, Geneva, Verdana, sans-serif;  /* Modern font */
+    border-radius: 8px;  /* Rounded corners for the widget */
+}
+
+QTreeWidget::item {
+    background-color: transparent;  /* Transparent background for each item */
+    padding: 8px 16px;  /* Comfortable padding around each item */
+    border-radius: 5px;  /* Rounded corners for each item */
+}
+
+QTreeWidget::item:hover {
+    background-color: #d1e7ff;  /* Light blue background on hover */
+    border-radius: 5px;  /* Maintain rounded corners on hover */
+}
+
+QTreeWidget::item:selected {
+    background-color: #4fa3e3;  /* Blue background for selected item */
+    color: white;  /* White text for selected item */
+    font-weight: bold;  /* Make selected item text bold */
+}
+
+QTreeWidget::branch {
+    border-image: url(:/images/branch.png);  /* Optional custom branch image */
+    background: none;  /* No background for the branch */
+}
+
+QTreeWidget::indicator {
+    width: 22px;  /* Width of the expand/collapse indicator */
+    height: 22px;  /* Height of the expand/collapse indicator */
+    padding: 2px;
+}
+
+QTreeWidget::indicator:opened {
+    image: url(:/images/expanded.png);  /* Custom image for the open indicator */
+}
+
+QTreeWidget::indicator:closed {
+    image: url(:/images/collapsed.png);  /* Custom image for the closed indicator */
+}
+
+QTreeWidget::header {
+    background-color: #4fa3e3;  /* Header background with a blue shade */
+    color: white;  /* White text for header */
+    font-weight: bold;  /* Bold header text */
+    font-size: 18px;  /* Slightly larger font size for the header */
+    border: none;  /* Remove border for the header */
+    padding: 12px;  /* Padding for header */
+    border-top-left-radius: 8px;  /* Rounded top-left corner */
+    border-top-right-radius: 8px;  /* Rounded top-right corner */
+}
+
+QTreeWidget::column {
+    padding: 6px 12px;  /* Padding inside the columns */
+}
+
+QTreeWidget::item:!selected {
+    background-color: #f9f9f9;  /* Subtle background for unselected items */
+}
+
+QTreeWidget::item:selected:!active {
+    background-color: #5cb1e0;  /* Lighter blue for selected inactive items */
+}
+
+QTreeWidget::item:disabled {
+    color: #888;  /* Dim color for disabled items */
+    background-color: #f3f3f3;  /* Lighter background for disabled items */
+}
+</string>
+          </property>
+          <column>
+           <property name="text">
+            <string>Files</string>
+           </property>
+           <property name="font">
+            <font>
+             <family>JetBrains Mono</family>
+             <pointsize>18</pointsize>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="background">
+            <color>
+             <red>28</red>
+             <green>113</green>
+             <blue>216</blue>
+            </color>
+           </property>
+          </column>
+          <item>
+           <property name="text">
+            <string>path_to_file</string>
+           </property>
+           <item>
+            <property name="text">
+             <string>Line number: x</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Line offset: y</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Line: 'line itself'</string>
+            </property>
+           </item>
+          </item>
+         </widget>
+        </item>
+        <item>
+         <spacer name="verticalSpacer_2">
+          <property name="orientation">
+           <enum>Qt::Orientation::Vertical</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Policy::Fixed</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item alignment="Qt::AlignmentFlag::AlignHCenter">
+         <widget class="QPushButton" name="pushButton_3">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
+    background-color: #4cd63a;              
+    border: 2px solid #238017;             
+    color: white;             
+    border-radius: 12px;                
+    font-size: 26px;                  
+    padding: 10px 20px;                 
+    font-family: 'Jetbrains Mono', 'Arial', sans-serif;   
+    text-align: center;                    
+}
+
+QPushButton:hover {
+    background-color: #238017;             
+    border: 2px solid #4cd63a;            
+}
+
+QPushButton:pressed {
+    background-color: #00ffa2;              /* Greenish background when pressed */
+    border: 2px solid #008253;              /* Greenish border when pressed */
+}
+
+QPushButton:disabled {
+    background-color: #bdc3c7;              /* Gray background when disabled */
+    border: 2px solid #95a5a6;              /* Gray border when disabled */
+    color: #7f8c8d;                         /* Lighter text color when disabled */
+}
+</string>
+          </property>
+          <property name="text">
+           <string>Go to Main</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+   </layout>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources/>
  <connections/>

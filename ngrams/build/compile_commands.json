@@ -1,0 +1,8 @@
+[
+{
+  "directory": "/home/strcarne/Documents/qt-based/string-searcher/ngrams/build",
+  "command": "/usr/bin/g++  -I/home/strcarne/Documents/qt-based/string-searcher/ngrams/include -g -std=gnu++20 -o CMakeFiles/ngrams.dir/src/engine.cpp.o -c /home/strcarne/Documents/qt-based/string-searcher/ngrams/src/engine.cpp",
+  "file": "/home/strcarne/Documents/qt-based/string-searcher/ngrams/src/engine.cpp",
+  "output": "CMakeFiles/ngrams.dir/src/engine.cpp.o"
+}
+]
