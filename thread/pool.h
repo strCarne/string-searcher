@@ -14,12 +14,14 @@ namespace thread {
 class Pool {
 public:
     inline explicit Pool(size_t num_threads) : is_running_(true) {
+        pthread_setname_np(pthread_self(), "search-string:master");
         pthread_mutex_init(&queue_mutex_, nullptr);
         pthread_cond_init(&condition_, nullptr);
 
         for (size_t i = 0; i < num_threads; ++i) {
             pthread_t thread;
             pthread_create(&thread, nullptr, &Pool::thread_entry, this);
+            pthread_setname_np(thread, (std::string("search-string:slave_") + std::to_string(i+1)).c_str());
             threads_.push_back(thread);
         }
     }

@@ -6,6 +6,7 @@
 #include <QFileDialog>
 #include <QMessageBox>
 #include <sys/stat.h>
+#include <iostream>
 
 #include "search/search.h"
 
@@ -25,8 +26,6 @@ MainWindow::MainWindow(QWidget *parent)
     movie->setSpeed(80);
     ui->label_wait->setMovie(movie);
     movie->start();
-
-    connect(&computationWatcher_, &QFutureWatcher<void>::finished, this, &MainWindow::OnSearchFinished);
 }
 
 MainWindow::~MainWindow()
@@ -35,11 +34,9 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::OnSearchFinished() {
-    auto search_results = computationFuture_.result();
-
     auto display = ui->treeWidget_results;
 
-    for (auto const &result : search_results) {
+    for (auto const &result : search_results_) {
         if (!result.entries.empty()) {
             auto item = new QTreeWidgetItem();
             item->setText(0, result.file_path.c_str());
@@ -70,22 +67,16 @@ void MainWindow::OnSearchFinished() {
         }
     }
 
+    search_results_.clear();
+    search_results_.shrink_to_fit();
+
     ui->stackedWidget->setCurrentIndex(PAGE_RESULTS);
 }
 
-
-void MainWindow::on_pushButton_choose_clicked()
-{
-    auto file_path = QFileDialog::getOpenFileName(this, "Choose a folder or file");
-
-    if (!file_path.isEmpty()) {
-        ui->lineEdit_file_path->setText(file_path);
-    }
-}
-
-
 void MainWindow::on_pushButton_search_clicked()
 {
+    std::cout << "Search button clicker\n";
+
     auto file_path = ui->lineEdit_file_path->text();
     if (file_path.isEmpty()) {
         QMessageBox::warning(this, "Warning", "Search path is not set.");
@@ -107,10 +98,15 @@ void MainWindow::on_pushButton_search_clicked()
         return;
     }
 
+    std::cout << "Path: " << file_path.toStdString() << '\n';
+    std::cout << "Target: " << target.toStdString() << '\n';
+    std::cout.flush();
+
     ui->stackedWidget->setCurrentIndex(PAGE_WAIT);
 
-    computationFuture_ = QtConcurrent::run([file_path, target]() { return search::DoMultithreaded(file_path.toStdString(), target.toStdString()); });
-    computationWatcher_.setFuture(computationFuture_);
+    auto future = QtConcurrent::run([this, file_path, target]() { this->search_results_ = search::DoMultithreaded(file_path.toStdString(), target.toStdString()); });
+    computationWatcher_.setFuture(future);
+    connect(&computationWatcher_, &QFutureWatcher<void>::finished, this, &MainWindow::OnSearchFinished);
 }
 
 
@@ -118,5 +114,32 @@ void MainWindow::on_pushButton_go_to_main_clicked()
 {
     ui->treeWidget_results->clear();
     ui->stackedWidget->setCurrentIndex(PAGE_SEARCH);
+}
+
+
+void MainWindow::on_pushButton_clear_clicked()
+{
+    ui->lineEdit_file_path->clear();
+    ui->lineEdit_target->clear();
+}
+
+
+void MainWindow::on_pushButton_choose_file_clicked()
+{
+    auto file_path = QFileDialog::getOpenFileName(this, "Choose a file");
+
+    if (!file_path.isEmpty()) {
+        ui->lineEdit_file_path->setText(file_path);
+    }
+}
+
+
+void MainWindow::on_pushButton_choose_folder_clicked()
+{
+    auto folder_path = QFileDialog::getExistingDirectory(this, "Choose a folder");
+
+    if (!folder_path.isEmpty()) {
+        ui->lineEdit_file_path->setText(folder_path);
+    }
 }
 
