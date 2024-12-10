@@ -1,3 +1,0 @@
-/home/strcarne/Documents/qt-based/string-searcher/ngrams/build/CMakeFiles/ngrams.dir
-/home/strcarne/Documents/qt-based/string-searcher/ngrams/build/CMakeFiles/edit_cache.dir
-/home/strcarne/Documents/qt-based/string-searcher/ngrams/build/CMakeFiles/rebuild_cache.dir
