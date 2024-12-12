@@ -30,13 +30,6 @@ public:
         bool ok;
     };
 
-    struct GuardedEntries {
-        Entries entries;
-        pthread_mutex_t guard;
-
-        inline GuardedEntries() { pthread_mutex_init(&this->guard, nullptr); }
-    };
-
     inline Searcher() : Searcher(DEFAULT_ENGINE, DEFAULT_THREADS_COUNT) {}
 
     inline Searcher(engine::Engine *engine)
@@ -67,7 +60,7 @@ public:
     //
     // Returns hash-map where key is a file name, where entries where found, and
     // value is a vector of found entries. Result contains only non-empty entries.
-    Ok<std::unordered_map<FileName, GuardedEntries>>
+    Ok<std::unordered_map<FileName, Entries>>
     Search(std::string const &root_path, std::string const &target);
 
 private:
@@ -87,22 +80,6 @@ private:
     // Returns true if search was successful, false otherwise.
     bool SearchInFile(std::string const &path);
 
-    // SingleThreadedSearchInFile searches for 'target' string in 'path' file in a
-    // single threaded manner without splitting file in chunks.
-    //
-    // 'path' - path to file in file system.
-    //
-    // Returns true if search was successful, false otherwise.
-    bool SingleThreadedSearchInFile(std::string const &path);
-
-    // SingleThreadedSearchInFile searches for 'target' string in 'path' file in a
-    // single threaded manner without splitting file in chunks.
-    //
-    // 'path' - path to file in file system.
-    //
-    // Returns true if search was successful, false otherwise.
-    bool MultiThreadedSearchInFile(std::string const &path);
-
     // IsIgnoredDirectory checks if 'path' is ignored directory.
     //
     // Returns true if 'path' is ignored directory, false otherwise.
@@ -114,7 +91,7 @@ private:
     bool IsIgnoredFile(std::string const &path);
 
     // Search results.
-    std::unordered_map<FileName, GuardedEntries> search_results_;
+    std::unordered_map<FileName, Entries> search_results_;
 
     // Search results guard.
     pthread_mutex_t search_results_guard_;

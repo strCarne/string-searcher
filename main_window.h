@@ -45,6 +45,6 @@ private:
     QFutureWatcher<void> computationWatcher_;
 
     search::Searcher searcher_;
-    std::unordered_map<search::Searcher::FileName, search::Searcher::GuardedEntries> search_results_;
+    std::unordered_map<search::Searcher::FileName, search::Searcher::Entries> search_results_;
 };
 #endif // MAIN_WINDOW_H

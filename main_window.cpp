@@ -46,13 +46,13 @@ void MainWindow::OnSearchFinished() {
     std::size_t total_entries_found = 0;
 
     for (auto const &result : search_results_) {
-        total_entries_found += result.second.entries.size();
+        total_entries_found += result.second.size();
 
         auto item = new QTreeWidgetItem();
         item->setText(0, result.first.c_str());
 
         int count = 0;
-        for (auto &entry : result.second.entries) {
+        for (auto &entry : result.second) {
             count += 1;
 
             auto itemEntry = new QTreeWidgetItem();

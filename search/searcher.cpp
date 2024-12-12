@@ -16,7 +16,7 @@
 
 namespace search {
 
-Searcher::Ok<std::unordered_map<Searcher::FileName, Searcher::GuardedEntries>>
+Searcher::Ok<std::unordered_map<Searcher::FileName, Searcher::Entries>>
 Searcher::Search(std::string const &root_path, std::string const &target) {
     // Making sure there are no previous search results.
     this->search_results_.clear();
@@ -126,19 +126,6 @@ bool Searcher::SearchInFile(std::string const &path) {
         return false;
     }
 
-    bool ok;
-    if (stat_buf.st_size < Searcher::kFileSizeSingleThreadedProcessingLimit) {
-        ok = this->SingleThreadedSearchInFile(path);
-    } else {
-        ok = this->SingleThreadedSearchInFile(path);
-        // TODO: switch to multithreaded
-        // ok = this->MultiThreadedSearchInFile(path, target);
-    }
-
-    return ok;
-}
-
-bool Searcher::SingleThreadedSearchInFile(std::string const &path) {
     FILE *file = fopen(path.c_str(), "r");
 
     if (file == nullptr) {
@@ -178,7 +165,7 @@ bool Searcher::SingleThreadedSearchInFile(std::string const &path) {
     }
 
     if (!local_results.empty()) {
-        GuardedEntries *entries = nullptr;
+        Entries *entries = nullptr;
 
         { // Locking 'search_results_' to retrieve entries for certain path
             pthread_mutex_lock(&this->search_results_guard_);
@@ -188,30 +175,21 @@ bool Searcher::SingleThreadedSearchInFile(std::string const &path) {
             auto has_entry =
                 this->search_results_.find(path) != this->search_results_.end();
             if (!has_entry) {
-                this->search_results_[path] = GuardedEntries();
+                this->search_results_[path] = Entries();
             }
 
             entries = &this->search_results_.at(path);
         }
 
-        { // Locking entries to add new entry
-            pthread_mutex_lock(&entries->guard);
-            auto defered_entries_guard_unlock = raii::OnDestroy(
-                [entries]() { pthread_mutex_unlock(&entries->guard); });
-
-            for (auto const &entry : local_results) {
-                entries->entries.push_back(entry);
-            }
+        for (auto const &entry : local_results) {
+            entries->push_back(entry);
         }
     }
 
     return true;
 }
 
-bool Searcher::MultiThreadedSearchInFile(std::string const &path) {
-    // TODO: implement
-    return false;
-}
+
 
 bool Searcher::IsIgnoredDirectory(std::string const &path) {
     auto ignored_dir =
