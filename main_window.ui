@@ -27,7 +27,7 @@
        </sizepolicy>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="page_search">
        <property name="sizePolicy">
@@ -457,76 +457,21 @@ QPushButton:disabled {
          <widget class="QTreeWidget" name="treeWidget_results">
           <property name="styleSheet">
            <string notr="true">QTreeWidget {
-    background-color: #f9f9f9;  /* Soft light background */
-    border: 1px solid #ddd;  /* Subtle border for the tree widget */
-    color: #444;  /* Darker text color for better readability */
-    font-size: 14px;  /* Font size for the items */
-    font-family: 'JetBrains Mono', Tahoma, Geneva, Verdana, sans-serif;  /* Modern font */
-    border-radius: 8px;  /* Rounded corners for the widget */
+    background-color: #ffffff;  /* светлый цвет фона */
+    border: 1px solid #d3d3d3;  /* рамка */
+    font: 14px &quot;Segoe UI&quot;;      /* шрифт */
+    color: #000000;             /* черный цвет текста */
 }
 
 QTreeWidget::item {
-    background-color: transparent;  /* Transparent background for each item */
-    padding: 8px 16px;  /* Comfortable padding around each item */
-    border-radius: 5px;  /* Rounded corners for each item */
-}
-
-QTreeWidget::item:hover {
-    background-color: #d1e7ff;  /* Light blue background on hover */
-    border-radius: 5px;  /* Maintain rounded corners on hover */
+    height: 25px;              /* высота элемента */
+    padding: 5px;              /* отступы */
+    color: #000000;            /* черный цвет текста для пунктов и подпунктов */
 }
 
 QTreeWidget::item:selected {
-    background-color: #4fa3e3;  /* Blue background for selected item */
-    color: white;  /* White text for selected item */
-    font-weight: bold;  /* Make selected item text bold */
-}
-
-QTreeWidget::branch {
-    border-image: url(:/images/branch.png);  /* Optional custom branch image */
-    background: none;  /* No background for the branch */
-}
-
-QTreeWidget::indicator {
-    width: 22px;  /* Width of the expand/collapse indicator */
-    height: 22px;  /* Height of the expand/collapse indicator */
-    padding: 2px;
-}
-
-QTreeWidget::indicator:opened {
-    image: url(:/images/expanded.png);  /* Custom image for the open indicator */
-}
-
-QTreeWidget::indicator:closed {
-    image: url(:/images/collapsed.png);  /* Custom image for the closed indicator */
-}
-
-QTreeWidget::header {
-    background-color: #4fa3e3;  /* Header background with a blue shade */
-    color: white;  /* White text for header */
-    font-weight: bold;  /* Bold header text */
-    font-size: 18px;  /* Slightly larger font size for the header */
-    border: none;  /* Remove border for the header */
-    padding: 12px;  /* Padding for header */
-    border-top-left-radius: 8px;  /* Rounded top-left corner */
-    border-top-right-radius: 8px;  /* Rounded top-right corner */
-}
-
-QTreeWidget::column {
-    padding: 6px 12px;  /* Padding inside the columns */
-}
-
-QTreeWidget::item:!selected {
-    background-color: #f9f9f9;  /* Subtle background for unselected items */
-}
-
-QTreeWidget::item:selected:!active {
-    background-color: #5cb1e0;  /* Lighter blue for selected inactive items */
-}
-
-QTreeWidget::item:disabled {
-    color: #888;  /* Dim color for disabled items */
-    background-color: #f3f3f3;  /* Lighter background for disabled items */
+    background-color: #a0c4ff;  /* цвет фона при выборе */
+    color: #000000;             /* цвет текста при выборе */
 }
 </string>
           </property>
