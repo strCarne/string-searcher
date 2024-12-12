@@ -24,9 +24,18 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
         thread/pool.h
-        search/search.h
-        search/search.cpp
-        rai/on_destroy.h
+        raii/on_destroy.h
+        search/searcher.h
+        search/entry.h
+        search/engine/engine.h
+        search/engine/naive.h search/engine/naive.cpp
+        search/engine/kmp.h search/engine/kmp.cpp
+        search/engine/boyer_moore.h search/engine/boyer_moore.cpp
+        search/result.h
+        search/searcher.cpp
+
+
+
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET string-searcher APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR

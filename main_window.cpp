@@ -8,8 +8,6 @@
 #include <sys/stat.h>
 #include <iostream>
 
-#include "search/search.h"
-
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -26,6 +24,8 @@ MainWindow::MainWindow(QWidget *parent)
     movie->setSpeed(80);
     ui->label_wait->setMovie(movie);
     movie->start();
+
+    connect(&computationWatcher_, &QFutureWatcher<void>::finished, this, &MainWindow::OnSearchFinished);
 }
 
 MainWindow::~MainWindow()
@@ -36,39 +36,49 @@ MainWindow::~MainWindow()
 void MainWindow::OnSearchFinished() {
     auto display = ui->treeWidget_results;
 
+    std::size_t total_files_found = search_results_.size();
+    std::size_t total_entries_found = 0;
+
     for (auto const &result : search_results_) {
-        if (!result.entries.empty()) {
-            auto item = new QTreeWidgetItem();
-            item->setText(0, result.file_path.c_str());
+        total_entries_found += result.second.entries.size();
 
-            int count = 0;
-            for (auto &entry : result.entries) {
-                count += 1;
+        auto item = new QTreeWidgetItem();
+        item->setText(0, result.first.c_str());
 
-                auto itemEntry = new QTreeWidgetItem();
-                itemEntry->setText(0, (std::string("entry") + " " + std::to_string(count)).c_str());
+        int count = 0;
+        for (auto &entry : result.second.entries) {
+            count += 1;
 
-                auto itemLineNumber = new QTreeWidgetItem();
-                itemLineNumber->setText(0, QString::fromUtf8("Line number: ") + QString::number(entry.line_number));
-                itemEntry->addChild(itemLineNumber);
+            auto itemEntry = new QTreeWidgetItem();
+            itemEntry->setText(0, (std::string("entry") + " " + std::to_string(count)).c_str());
 
-                auto itemLineOffset = new QTreeWidgetItem();
-                itemLineOffset->setText(0, QString::fromUtf8("Line offset: ") + QString::number(entry.line_offset));
-                itemEntry->addChild(itemLineOffset);
+            auto itemLineNumber = new QTreeWidgetItem();
+            itemLineNumber->setText(0, QString::fromUtf8("Line number: ") + QString::number(entry.line_number));
+            itemEntry->addChild(itemLineNumber);
 
-                auto itemLineContent = new QTreeWidgetItem();
-                itemLineContent->setText(0, QString::fromUtf8("Content: ") + QString::fromStdString(entry.line_content));
-                itemEntry->addChild(itemLineContent);
+            auto itemLineOffset = new QTreeWidgetItem();
+            itemLineOffset->setText(0, QString::fromUtf8("Line offset: ") + QString::number(entry.line_offset));
+            itemEntry->addChild(itemLineOffset);
 
-                item->addChild(itemEntry);
-            }
+            auto itemLineContent = new QTreeWidgetItem();
+            auto content = entry.line_content;
+            content.pop_back();
+            itemLineContent->setText(0, QString::fromUtf8("Content: ") + QString::fromStdString(content));
+            itemEntry->addChild(itemLineContent);
 
-            display->addTopLevelItem(item);
+            item->addChild(itemEntry);
         }
+
+        display->addTopLevelItem(item);
     }
 
+    std::cout << "Files: " << total_files_found << '\n';
+    std::cout << "Entries: " << total_entries_found << '\n';
+    std::cout.flush();
+
+    display->setHeaderLabel((std::string("Files: ") + std::to_string(total_files_found) + ", Entries: " + std::to_string(total_entries_found)).c_str());
+
     search_results_.clear();
-    search_results_.shrink_to_fit();
 
     ui->stackedWidget->setCurrentIndex(PAGE_RESULTS);
 }
@@ -104,11 +114,10 @@ void MainWindow::on_pushButton_search_clicked()
 
     ui->stackedWidget->setCurrentIndex(PAGE_WAIT);
 
-    auto future = QtConcurrent::run([this, file_path, target]() { this->search_results_ = search::DoMultithreaded(file_path.toStdString(), target.toStdString()); });
-    computationWatcher_.setFuture(future);
-    connect(&computationWatcher_, &QFutureWatcher<void>::finished, this, &MainWindow::OnSearchFinished);
-}
+    auto future = QtConcurrent::run([this, file_path, target]() { this->search_results_ = this->searcher_.Search(file_path.toStdString(), target.toStdString()).result; });
 
+    computationWatcher_.setFuture(future);
+}
 
 void MainWindow::on_pushButton_go_to_main_clicked()
 {

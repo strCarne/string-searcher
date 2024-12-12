@@ -6,7 +6,7 @@
 #include <QFutureWatcher>
 #include <vector>
 
-#include "search/search.h"
+#include "search/searcher.h"
 
 #define PAGE_SEARCH 0
 #define PAGE_WAIT 1
@@ -43,6 +43,8 @@ private:
     Ui::MainWindow *ui;
 
     QFutureWatcher<void> computationWatcher_;
-    std::vector<search::Result> search_results_;
+
+    search::Searcher searcher_;
+    std::unordered_map<search::Searcher::FileName, search::Searcher::GuardedEntries> search_results_;
 };
 #endif // MAIN_WINDOW_H
