@@ -1,9 +1,8 @@
-#ifndef ON_DESTROY_H
-#define ON_DESTROY_H
+#pragma once
 
 #include <functional>
 
-namespace rai {
+namespace raii {
 
 template <typename F, typename... Args> class OnDestroy {
 public:
@@ -17,6 +16,4 @@ private:
     std::function<void()> defered_call_;
 };
 
-} // namespace rai
-
-#endif // ON_DESTROY_H
+} // namespace raii
