@@ -53,6 +53,13 @@ Searcher::Search(std::string const &root_path, std::string const &target) {
 
 bool Searcher::IterateRecursively(std::string const &path) {
     auto directory = opendir(path.c_str());
+    if (directory == NULL) {
+        std::cerr << "[search::Searcher::IterateRecursively] failed to open "
+                  << path << ": " << strerror(errno) << '\n';
+
+        return false;
+    }
+
     auto defered_close_dir = raii::OnDestroy([directory, path]() {
         if (closedir(directory) != 0) {
             std::cerr << "[search::Searcher::IterateRecursively] failed to "
@@ -60,13 +67,6 @@ bool Searcher::IterateRecursively(std::string const &path) {
                       << path << ": " << strerror(errno) << '\n';
         }
     });
-
-    if (directory == NULL) {
-        std::cerr << "[search::Searcher::IterateRecursively] failed to open "
-                  << path << ": " << strerror(errno) << '\n';
-
-        return false;
-    }
 
     while (auto entry = readdir(directory)) {
         // Skip processing of current and parent directories.
@@ -140,12 +140,6 @@ bool Searcher::SearchInFile(std::string const &path) {
 
 bool Searcher::SingleThreadedSearchInFile(std::string const &path) {
     FILE *file = fopen(path.c_str(), "r");
-    auto defered_close_file = raii::OnDestroy([file, &path]() {
-        if (fclose(file) != 0) {
-            std::cerr << "[search::Searcher::SignleThreadedSearchInFile] failed to "
-                      << "close [" << path << "]" << ": " << strerror(errno) << '\n';
-        }
-    });
 
     if (file == nullptr) {
         std::cerr << "[search::Searcher::SignleThreadedSearchInFile] failed to "
@@ -153,6 +147,13 @@ bool Searcher::SingleThreadedSearchInFile(std::string const &path) {
 
         return false;
     }
+
+    auto defered_close_file = raii::OnDestroy([file, &path]() {
+        if (fclose(file) != 0) {
+            std::cerr << "[search::Searcher::SignleThreadedSearchInFile] failed to "
+                      << "close [" << path << "]" << ": " << strerror(errno) << '\n';
+        }
+    });
 
     // Used by 'getline'.
     char *line = NULL;
