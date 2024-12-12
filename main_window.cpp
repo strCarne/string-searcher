@@ -8,6 +8,10 @@
 #include <sys/stat.h>
 #include <iostream>
 
+#include "search/engine/kmp.h"
+#include "search/engine/boyer_moore.h"
+#include "search/engine/naive.h"
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -24,6 +28,8 @@ MainWindow::MainWindow(QWidget *parent)
     movie->setSpeed(80);
     ui->label_wait->setMovie(movie);
     movie->start();
+
+    this->ui->radioButton_kmp->setChecked(true);
 
     connect(&computationWatcher_, &QFutureWatcher<void>::finished, this, &MainWindow::OnSearchFinished);
 }
@@ -106,6 +112,14 @@ void MainWindow::on_pushButton_search_clicked()
         QMessageBox::warning(this, "Warning", "Target string is not set.");
 
         return;
+    }
+
+    if (this->ui->radioButton_kmp->isChecked()) {
+        this->searcher_.ResetEngine(new search::engine::Kmp(target.toStdString()));
+    } else if (this->ui->radioButton_bm->isChecked()) {
+        this->searcher_.ResetEngine(new search::engine::BoyerMoore(target.toStdString()));
+    } else {
+        this->searcher_.ResetEngine(new search::engine::Naive(target.toStdString()));
     }
 
     std::cout << "Path: " << file_path.toStdString() << '\n';

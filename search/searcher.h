@@ -51,6 +51,9 @@ public:
         this->search_engine_.reset(DEFAULT_ENGINE);
     }
 
+    // ResetEngine Reset Searcher's search engine.
+    inline void ResetEngine(engine::Engine *new_engine) { search_engine_.reset(new_engine); }
+
     inline std::vector<std::string> &ignored_dirs() { return ignored_dirs_; }
     inline std::vector<std::string> &ignored_files() { return ignored_files_; }
 

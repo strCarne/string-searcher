@@ -27,7 +27,7 @@
        </sizepolicy>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="page_search">
        <property name="sizePolicy">
@@ -403,6 +403,114 @@ QPushButton:disabled {
              </size>
             </property>
            </spacer>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="radioButton_kmp">
+            <property name="styleSheet">
+             <string notr="true">QRadioButton {
+    background-color: #3498db;              /* Blue background */
+    border: 2px solid #2980b9;              /* Darker blue border */
+    color: white;                           /* White text */
+    border-radius: 12px;                    /* Rounded corners */
+    font-size: 18px;                        /* Font size */
+    padding: 10px 20px;                     /* Padding for button */
+    font-family: 'JetBrains Mono', 'Arial', sans-serif;       /* Font family */
+    text-align: center;                     /* Center the text */
+}
+
+QRadioButton:hover {
+    background-color: #2980b9;              /* Darker blue on hover */
+    border: 2px solid #3498db;              /* Light blue border on hover */
+}
+
+QRadioButton:pressed {
+    background-color: #1abc9c;              /* Greenish background when pressed */
+    border: 2px solid #16a085;              /* Greenish border when pressed */
+}
+
+QRadioButton:disabled {
+    background-color: #bdc3c7;              /* Gray background when disabled */
+    border: 2px solid #95a5a6;              /* Gray border when disabled */
+    color: #7f8c8d;                         /* Lighter text color when disabled */
+}
+</string>
+            </property>
+            <property name="text">
+             <string>Knuth-Morris-Pratt</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="radioButton_bm">
+            <property name="styleSheet">
+             <string notr="true">QRadioButton {
+    background-color: #3498db;              /* Blue background */
+    border: 2px solid #2980b9;              /* Darker blue border */
+    color: white;                           /* White text */
+    border-radius: 12px;                    /* Rounded corners */
+    font-size: 18px;                        /* Font size */
+    padding: 10px 20px;                     /* Padding for button */
+    font-family: 'JetBrains Mono', 'Arial', sans-serif;       /* Font family */
+    text-align: center;                     /* Center the text */
+}
+
+QRadioButton:hover {
+    background-color: #2980b9;              /* Darker blue on hover */
+    border: 2px solid #3498db;              /* Light blue border on hover */
+}
+
+QRadioButton:pressed {
+    background-color: #1abc9c;              /* Greenish background when pressed */
+    border: 2px solid #16a085;              /* Greenish border when pressed */
+}
+
+QRadioButton:disabled {
+    background-color: #bdc3c7;              /* Gray background when disabled */
+    border: 2px solid #95a5a6;              /* Gray border when disabled */
+    color: #7f8c8d;                         /* Lighter text color when disabled */
+}
+</string>
+            </property>
+            <property name="text">
+             <string>Boyer-Moore</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="radioButton_naive">
+            <property name="styleSheet">
+             <string notr="true">QRadioButton {
+    background-color: #3498db;              /* Blue background */
+    border: 2px solid #2980b9;              /* Darker blue border */
+    color: white;                           /* White text */
+    border-radius: 12px;                    /* Rounded corners */
+    font-size: 18px;                        /* Font size */
+    padding: 10px 20px;                     /* Padding for button */
+    font-family: 'JetBrains Mono', 'Arial', sans-serif;       /* Font family */
+    text-align: center;                     /* Center the text */
+}
+
+QRadioButton:hover {
+    background-color: #2980b9;              /* Darker blue on hover */
+    border: 2px solid #3498db;              /* Light blue border on hover */
+}
+
+QRadioButton:pressed {
+    background-color: #1abc9c;              /* Greenish background when pressed */
+    border: 2px solid #16a085;              /* Greenish border when pressed */
+}
+
+QRadioButton:disabled {
+    background-color: #bdc3c7;              /* Gray background when disabled */
+    border: 2px solid #95a5a6;              /* Gray border when disabled */
+    color: #7f8c8d;                         /* Lighter text color when disabled */
+}
+</string>
+            </property>
+            <property name="text">
+             <string>Naive</string>
+            </property>
+           </widget>
           </item>
          </layout>
         </item>
